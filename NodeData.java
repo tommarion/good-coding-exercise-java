@@ -2,15 +2,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NodeData {
-	public Integer parentId;
+	public String parentId;
 	public String nodeName;
-	public List<Integer> childrenIds;
+	public List<String> childrenIds;
 
     public NodeData(String parentId, String nodeName) {
     	if (parentId.equals("null")) {
     		this.parentId = null;
     	} else {
-	    	this.parentId = Integer.valueOf(parentId);
+	    	this.parentId = parentId;
     	}
     	this.nodeName = nodeName;
     	this.childrenIds = new ArrayList<>();
@@ -21,11 +21,11 @@ public class NodeData {
     	return this.nodeName;
     }
 
-    public Integer getParentId() {
+    public String getParentId() {
     	return this.parentId;
     }
 
-    public List<Integer> getChildrenIds() {
+    public List<String> getChildrenIds() {
     	return this.childrenIds;
     }
 }

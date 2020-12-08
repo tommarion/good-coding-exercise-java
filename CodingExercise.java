@@ -14,8 +14,8 @@ public class CodingExercise {
             while (fileScanner.hasNextLine()) {
                 String input = fileScanner.nextLine();
                 FamilyTreeParser familyTreeParser = new FamilyTreeParser();
-                Map<Integer, NodeData> familyTree = familyTreeParser.parseInputStr(input);
-                familyTreeParser.printFamilyTree(familyTree, Integer.valueOf(0), 0);
+                Map<String, NodeData> familyTree = familyTreeParser.parseInputStr(input);
+                familyTreeParser.printFamilyTree(familyTree, "0", 0);
             }
         } catch (FileNotFoundException fnfe) {
             System.out.println("ERROR - unable to load file. Make sure input.csv exists in the same directory as the program");

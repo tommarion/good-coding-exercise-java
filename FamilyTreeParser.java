@@ -32,14 +32,14 @@ public class FamilyTreeParser {
 	 * in any order without increasing complexity.
 	 *  
 	 */
-	public Map<Integer, NodeData> parseInputStr(String familyTreeStr) {
+	public Map<String, NodeData> parseInputStr(String familyTreeStr) {
 
 		// Stores our family tree relation data
- 		Map<Integer, NodeData> familyTree = new HashMap<>();
+ 		Map<String, NodeData> familyTree = new HashMap<>();
 
  		// Stores parent/children relation when parent data has not been parsed yet
  		// This is only used when input data is not in ascending order by node_id
- 		Map<Integer, List<Integer>> missedRelationships = new HashMap<>();
+ 		Map<String, List<String>> missedRelationships = new HashMap<>();
 
  		// Splits the string into nodes based on the pipe delimiter
         String[] nodes = familyTreeStr.split("\\|");
@@ -47,8 +47,8 @@ public class FamilyTreeParser {
         	// Splits the node into data and creates an object with it
         	FamilyTreeNode familyTreeNode = new FamilyTreeNode(node.split(","));
 
-        	Integer parentId = familyTreeNode.getNodeData().getParentId();
-        	Integer nodeId = familyTreeNode.getNodeId();
+        	String parentId = familyTreeNode.getNodeData().getParentId();
+        	String nodeId = familyTreeNode.getNodeId();
         	familyTree.put(nodeId, familyTreeNode.getNodeData());
 
         	// Add children ids to this node if we've processed any before now
@@ -70,7 +70,7 @@ public class FamilyTreeParser {
         				missedRelationships.get(parentId).add(nodeId);
         			// We have no data on this parent node, create a new entry
         			} else {
-        				List<Integer> children = new ArrayList<>();
+        				List<String> children = new ArrayList<>();
         				children.add(nodeId);
         				missedRelationships.put(parentId, children);
         			}
@@ -91,7 +91,7 @@ public class FamilyTreeParser {
 	 * operates at O(n) efficiency.
 	 *
 	 */
-	public void printFamilyTree(Map<Integer, NodeData> tree, Integer nodeId, int generation) {
+	public void printFamilyTree(Map<String, NodeData> tree, String nodeId, int generation) {
 		NodeData node = tree.get(nodeId);
 		// Print the appropriate number of tabs for the generation we're on
 		for (int i=0; i < generation; i++) {
@@ -101,7 +101,7 @@ public class FamilyTreeParser {
 
 		// If this node has children, recursively call this function for all of them
 		if (!node.getChildrenIds().isEmpty()) {
-			for (Integer childId : node.getChildrenIds()) {
+			for (String childId : node.getChildrenIds()) {
 				// Increase generation for children
 				printFamilyTree(tree, childId, generation + 1);
 			}
