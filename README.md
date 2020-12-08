@@ -11,9 +11,13 @@ Once compiled, run the program by using the command:
 
 	java CodingExercise
 
-This program expects a file named "input.csv" to be in the same directory.
+This program expects a file named "input.txt" to be in the same directory.
 
-#							Parsing
+
+#							FamilyTreeParser
+
+This was intended to accept unordered data, and is therefore less
+efficient than 'MemoryEfficientTreeParser'.
 
 Using HashMap as a data structure allows for O(1) insert and get
 operations. When parsing the string, it is first broken into CSV "nodes"
@@ -39,9 +43,15 @@ child data has been stored there, and if so, includes that data in the
 tree node and removes it from the separate HashMap. This is also done in
 O(1) complexity, which makes the overall function operate at O(n).
 
-#							Printing
-
 Printing the tree is as simple as printing each node recursively,
 starting with the root and then respective children. Since a get 
 operation on a HashMap is O(1) complexity, printing the entire tree is
 done at O(n).
+
+
+
+#							MemoryEfficientTreeParser
+
+This class assumes the input is ordered by node_id and and by generation.
+It stores name/node_id relations, groups the nodes by generation, and 
+prints everything in a single iteration.
