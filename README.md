@@ -11,6 +11,7 @@ Once compiled, run the program by using the command:
 
 	java CodingExercise
 
+This program expects a file named "input.csv" to be in the same directory.
 
 #							Parsing
 
