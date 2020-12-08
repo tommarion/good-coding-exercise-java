@@ -1,17 +1,43 @@
-##########################################################################
-
-This program was done as a coding exercise for Lumen by Thomas Marion on
-December 2nd 2020.
-
-To run this program, assuming python3 is installed, make sure there is a
-csv file of the discussed format (parent_id,node_id,node_name|...) named
-"input.csv" in the same directory. Navigate to this directory in the
-console. This was tested with python3 using the command:
-
-"python3 ./exercise.py".
-
-In addition to the sample data, it was designed to handle data that is not
-arranged in any specific order (such as ascending node_id) so hopefully 
-you can play around with it!
+This program was updated to emphasize efficiency on Dec 7 2020 as part of
+a coding exercise for Lumen.
 
 ##########################################################################
+#
+#							PARSING
+#
+##########################################################################
+
+Using HashMap as a data structure allows for O(1) insert and get
+operations. When parsing the string, it is first broken into CSV "nodes"
+based on the pipe delimiter character "|". These CSV nodes are split into
+data objects and added into the HashMap object. The parent node is then
+selected, and updated to include its child node id.
+
+DUE TO LIMITED INSTRUCTION
+	- I did NOT assume that the input data would be in ascending order
+	by node_id
+	- I did NOT assume the input data would be more than one line in
+	length
+	- I did NOT assume the input data would be more too long for scanner
+	to handle
+
+This program CAN BE MODIFIED to handle any of these scenarios if
+necessary.
+
+To be able to accept nodes in any order, when a node is processed before
+its parent, the parent-child relationship data is stored in a separate
+HashMap. When new nodes are processed, a check is done to see whether
+child data has been stored there, and if so, includes that data in the
+tree node and removes it from the separate HashMap. This is also done in
+O(1) complexity, which makes the overall function operate at O(n).
+
+##########################################################################
+#
+#							PRINTING
+#
+##########################################################################
+
+Printing the tree is as simple as printing each node recursively,
+starting with the root and then respective children. Since a get 
+operation on a HashMap is O(1) complexity, printing the entire tree is
+done at O(n).
